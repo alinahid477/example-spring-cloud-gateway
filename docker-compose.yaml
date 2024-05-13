@@ -1,0 +1,71 @@
+version: "3"
+services:
+
+  # proxy:
+  #   image: nginx
+  #   container_name: nginx-proxy
+  #   restart: unless-stopped
+  #   networks: 
+  #     foobar:
+  #       ipv4_address: 172.20.0.2
+  #   ports: 
+  #     - 80:80
+  #     - 443:443
+  #   volumes: 
+  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  #     - ./nginx/certs:/etc/nginx/certs
+
+  gatewayservice:
+    container_name: gatewayservice
+    image: gatewayservice:1.0.0
+    build:
+      context: ./gateway-service-main
+      dockerfile: Dockerfile
+    environment:
+      POSTS_ROUTE_URI: http://172.21.0.3:8080
+      COMMENTS_ROUTE_URI: http://172.21.0.4:8080
+    networks: 
+      scg:
+        ipv4_address: 172.21.0.2
+    ports:
+      - 8082:8080
+    restart: "no"
+
+  posts:
+    container_name: scg-posts
+    image: scg-posts:1.0.0
+    build:
+      context: ./posts-main
+      dockerfile: Dockerfile
+    environment:
+      VAR: A
+    networks: 
+      scg:
+        ipv4_address: 172.21.0.3
+    ports:
+      - 8083:8080
+    restart: "no"
+
+
+  comments:
+    container_name: scg-comments
+    image: scg-comments:1.0.0
+    build:
+      context: ./comments-main
+      dockerfile: Dockerfile
+    environment:
+      VAR: A
+    networks: 
+      scg:
+        ipv4_address: 172.21.0.4
+    ports:
+      - 8084:8080
+    restart: "no"
+
+networks:
+  scg:
+    # driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1

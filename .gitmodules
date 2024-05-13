@@ -1,0 +1,9 @@
+[submodule "scg-gateway-service"]
+	path = scg-gateway-service
+	url = https://github.com/alinahid477/scg-gateway-service.git
+[submodule "scg-posts-service"]
+	path = scg-posts-service
+	url = https://github.com/alinahid477/scg-posts-service.git
+[submodule "scg-comments-service"]
+	path = scg-comments-service
+	url = https://github.com/alinahid477/scg-comments-service.git
