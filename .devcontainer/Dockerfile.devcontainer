@@ -1,0 +1,21 @@
+FROM maven:3.8.5-openjdk-18-slim
+
+RUN java --version
+
+RUN apt-get update && apt-get install -y \
+  vim \
+  git \
+  openssl \
+  unzip \
+	curl \
+  apt-transport-https \
+  less \
+  sudo \
+  docker.io
+
+
+# COPY tilttunnel/tanzu-framework-linux-amd64-v0.28.1.3.tar ./binaries/
+
+RUN useradd -rm -d /home/javauser -s /bin/bash -g root -G sudo -u 1001 javauser -p "$(openssl passwd -1 1234)"
+USER javauser
+WORKDIR /home/javauser

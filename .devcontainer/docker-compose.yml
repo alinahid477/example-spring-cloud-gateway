@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  
+  scgdevenv:
+    container_name: scg-dev-env
+    build:
+      context: .
+      dockerfile: ./Dockerfile.devcontainer
+    volumes:
+      - ../:/workspace:cached
+    command: sleep infinity
+    networks: 
+      scg:
+        ipv4_address: 172.21.0.3
+    ports:
+      - 8080:8080
+      - 20002:20002
+    restart: unless-stopped
+    stdin_open: true
+    extra_hosts:
+      - "kubernetes:127.0.0.1"
+
+networks:
+  scg:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+        
