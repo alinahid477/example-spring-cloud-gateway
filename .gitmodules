@@ -7,3 +7,6 @@
 [submodule "scg-comments-service"]
 	path = scg-comments-service
 	url = https://github.com/alinahid477/scg-comments-service.git
+[submodule "scg-registry"]
+	path = scg-registry
+	url = https://github.com/alinahid477/scg-registry.git
