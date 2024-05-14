@@ -20,11 +20,12 @@ services:
     container_name: gatewayservice
     image: gatewayservice:1.0.0
     build:
-      context: ./gateway-service-main
+      context: ./scg-gateway-service
       dockerfile: Dockerfile
     environment:
       POSTS_ROUTE_URI: http://172.21.0.4:8080
       COMMENTS_ROUTE_URI: http://172.21.0.5:8080
+      EUREKA_SERVER: http://172.21.0.2:8761/eureka
     networks: 
       scg:
         ipv4_address: 172.21.0.3
@@ -36,10 +37,10 @@ services:
     container_name: scg-posts
     image: scg-posts:1.0.0
     build:
-      context: ./posts-main
+      context: ./scg-posts-service
       dockerfile: Dockerfile
     environment:
-      VAR: A
+      EUREKA_SERVER: http://172.21.0.2:8761/eureka
     networks: 
       scg:
         ipv4_address: 172.21.0.4
@@ -52,10 +53,10 @@ services:
     container_name: scg-comments
     image: scg-comments:1.0.0
     build:
-      context: ./comments-main
+      context: ./scg-comments-service
       dockerfile: Dockerfile
     environment:
-      VAR: A
+      EUREKA_SERVER: http://172.21.0.2:8761/eureka
     networks: 
       scg:
         ipv4_address: 172.21.0.5

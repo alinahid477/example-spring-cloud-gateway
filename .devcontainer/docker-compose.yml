@@ -11,8 +11,8 @@ services:
       - ../:/workspace:cached
     command: sleep infinity
     networks: 
-      scg:
-        ipv4_address: 172.21.0.3
+      scgdevenv:
+        ipv4_address: 172.22.0.2
     ports:
       - 8080:8080
       - 20002:20002
@@ -22,9 +22,10 @@ services:
       - "kubernetes:127.0.0.1"
 
 networks:
-  scg:
-    driver: bridge
+  scgdevenv:
+    # driver: bridge
     ipam:
       config:
-        - subnet: 172.21.0.0/16
+        - subnet: 172.22.0.0/16
+          gateway: 172.22.0.1
         

@@ -14,9 +14,11 @@
 		"vscode": {
 			"extensions": [
 				"Pivotal.vscode-boot-dev-pack",
+				"vmware.vscode-boot-dev-pack",
 				"vscjava.vscode-java-pack",
 				"sohibe.java-generate-setters-getters",
 				"GitHub.vscode-pull-request-github"
+				
 			],
 		}
 	},
